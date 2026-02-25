@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Dashboard</title>
+<style>
+body{font-family:Arial;background:#f4f4f4;padding:20px}
+.card{background:white;padding:15px;margin-bottom:10px;border-radius:8px}
+button{margin:5px;padding:5px 10px;border:none;border-radius:5px;cursor:pointer}
+.approve{background:#28a745;color:white}
+.complete{background:#007bff;color:white}
+.delete{background:#dc3545;color:white}
+</style>
+</head>
+<body>
+
+<h2>Admin Dashboard</h2>
+<div id="data"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getDatabase, ref, onValue, update, remove } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAA36wfnMT7LgCMUgjtHx8wsGYoBOHeXiQ",
+  authDomain: "education-c3132.firebaseapp.com",
+  databaseURL: "https://education-c3132-default-rtdb.firebaseio.com",
+  projectId: "education-c3132",
+  storageBucket: "education-c3132.firebasestorage.app",
+  messagingSenderId: "1024541965642",
+  appId: "1:1024541965642:web:e778014d245a9c3e2195b3"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+onValue(ref(db,"appointments"), (snapshot)=>{
+const container=document.getElementById("data");
+container.innerHTML="";
+snapshot.forEach(child=>{
+const data=child.val();
+const key=child.key;
+container.innerHTML+=`
+<div class="card">
+<b>${data.name}</b><br>
+${data.phone}<br>
+${data.service}<br>
+${data.date}<br>
+Status: ${data.status}<br>
+<button class="approve" onclick="updateStatus('${key}','Approved')">Approve</button>
+<button class="complete" onclick="updateStatus('${key}','Completed')">Complete</button>
+<button class="delete" onclick="deleteData('${key}')">Delete</button>
+</div>`;
+});
+});
+
+window.updateStatus=function(key,status){
+update(ref(db,"appointments/"+key),{status});
+}
+
+window.deleteData=function(key){
+remove(ref(db,"appointments/"+key));
+}
+</script>
+
+</body>
+</html>
