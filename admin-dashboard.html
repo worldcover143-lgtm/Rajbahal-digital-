@@ -1,34 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Admin Dashboard</title>
+    <title>Admin Dashboard - Rajbahal Digital</title>
     <style>
         body{font-family:Arial;background:#f4f4f4;padding:20px}
-        .card{background:white;padding:15px;margin-bottom:10px;border-radius:8px;box-shadow:0 2px 5px rgba(0,0,0,0.1)}
+        .card{background:white;padding:15px;margin-bottom:10px;border-radius:8px;box-shadow:0 2px 5px rgba(0,0,0,0.1); border-left: 5px solid #004aad;}
+        .details{margin-bottom:10px; font-size:14px;}
+        .time-tag{background:#fff3cd; color:#856404; padding:2px 5px; border-radius:3px; font-weight:bold;}
         button{margin:5px;padding:8px 12px;border:none;border-radius:5px;cursor:pointer;color:white}
-        .approve{background:#28a745}
-        .complete{background:#007bff}
-        .delete{background:#dc3545}
-        .whatsapp{background:#25D366; text-decoration:none; display:inline-block; font-size:14px}
+        .whatsapp{background:#25D366; text-decoration:none; display:inline-block;}
     </style>
 </head>
 <body>
-    <h2>Admin Dashboard - Rajbahal Digital</h2>
-    <div id="data">Loading appointments...</div>
+    <h2>Admin Dashboard (New Bookings)</h2>
+    <div id="data">Loading...</div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-        import { getDatabase, ref, onValue, update, remove } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-        // Yahan apni purani details hi rehne dena
         const firebaseConfig = {
-            apiKey: "AIzaSyAA36vfnM77LgCMJgjTHx8wsGYoBQHzXIQ", 
-            authDomain: "education-c3132.firebaseapp.com",
+            apiKey: "AIzaSyAA36vfnM77LgCMJgjTHx8wsGYoBQHzXIQ",
             databaseURL: "https://education-c3132-default-rtdb.firebaseio.com",
-            projectId: "education-c3132",
-            storageBucket: "education-c3132.appspot.com",
-            messagingSenderId: "1024541965642",
-            appId: "1:1024541965642:web:e778014d245a9c3e2195b3"
+            projectId: "education-c3132"
         };
 
         const app = initializeApp(firebaseConfig);
@@ -39,37 +33,21 @@
             container.innerHTML = "";
             snapshot.forEach((child)=>{
                 const data = child.val();
-                const key = child.key;
-                
-                // WhatsApp Link for Approval
-                const waMsg = `Namaste ${data.name}, Rajbahal Digital ki taraf se aapka appointment APPROVE ho gaya hai.`;
-                const waLink = `https://wa.me/91${data.phone}?text=${encodeURIComponent(waMsg)}`;
+                const waLink = `https://wa.me/91${data.phone}?text=Namaste%20${data.name},%20Aapka%20appointment%20${data.appointmentDate}%20ko%20${data.appointmentTime}%20baje%20APPROVE%20ho%20gaya%20hai.`;
 
                 container.innerHTML += `
                     <div class="card">
-                        <b>Name:</b> ${data.name}<br>
-                        <b>Phone:</b> ${data.phone}<br>
-                        <b>Service:</b> ${data.service}<br>
-                        <b>Status:</b> ${data.status || 'Pending'}<br>
-                        <button class="approve" onclick="updateStatus('${key}', 'Approved')">Approve</button>
-                        <a href="${waLink}" target="_blank" class="whatsapp" style="padding:8px 12px; border-radius:5px; color:white;">WhatsApp Msg ✅</a>
-                        <button class="complete" onclick="updateStatus('${key}', 'Completed')">Complete</button>
-                        <button class="delete" onclick="deleteData('${key}')">Delete</button>
+                        <div class="details">
+                            <b>Name:</b> ${data.name} | <b>Service:</b> ${data.service}<br>
+                            <b>Phone:</b> ${data.phone}<br>
+                            <b>Date:</b> <span class="time-tag">${data.appointmentDate}</span> | 
+                            <b>Time:</b> <span class="time-tag">${data.appointmentTime}</span>
+                        </div>
+                        <a href="${waLink}" target="_blank" class="whatsapp" style="padding:8px 12px; border-radius:5px; color:white;">WhatsApp Approve ✅</a>
                     </div>
                 `;
             });
         });
-
-        window.updateStatus = function(key, status){
-            update(ref(db, "appointments/"+key), {status: status});
-        };
-
-        window.deleteData = function(key){
-            if(confirm("Delete karna chahte hain?")) {
-                remove(ref(db, "appointments/"+key));
-            }
-        };
     </script>
 </body>
 </html>
-
