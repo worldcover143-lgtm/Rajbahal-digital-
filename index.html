@@ -8,11 +8,10 @@
         body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f2f5; margin: 0; padding: 10px; }
         .main-container { max-width: 600px; margin: auto; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         .header { background: #004aad; color: white; padding: 20px; text-align: center; }
-        .service-section { padding: 15px; border-bottom: 8px solid #f0f2f5; }
-        .section-title { font-weight: bold; color: #004aad; font-size: 18px; display: block; margin-bottom: 10px; border-left: 4px solid #004aad; padding-left: 10px; }
-        .service-list { list-style: none; padding: 0; margin: 0; font-size: 14px; line-height: 1.8; color: #333; }
-        .service-list li { padding: 8px 0; border-bottom: 1px solid #eee; }
-        .service-list li:last-child { border-bottom: none; }
+        .section { padding: 15px; border-bottom: 8px solid #f0f2f5; }
+        .section-title { font-weight: bold; color: #004aad; font-size: 18px; display: block; margin-bottom: 10px; border-left: 4px solid #d32f2f; padding-left: 10px; }
+        .service-list { list-style: none; padding: 0; margin: 0; font-size: 14px; line-height: 1.6; color: #333; }
+        .service-list li { padding: 6px 0; border-bottom: 1px dotted #ccc; }
         
         /* Form Styling */
         .form-area { padding: 20px; background: #fff; }
@@ -27,48 +26,47 @@
 <div class="main-container">
     <div class="header">
         <h1 style="margin:0;">Rajbahal Digital</h1>
-        <p style="margin:5px 0 0;">Janaseva Kendra - Online Services</p>
+        <p style="margin:5px 0 0;">Janaseva Kendra & Education Hub</p>
     </div>
 
-    <div class="service-section">
-        <span class="section-title">📄 Amara Sabu Seva (Our Services)</span>
+    <div class="section">
+        <span class="section-title" style="border-left-color: #d32f2f;">🎓 Education Hub Services</span>
         <ul class="service-list">
-            <li>✅ <b>Aadhaar:</b> Nua Aadhaar / Correction / Mobile Link</li>
-            <li>✅ <b>PAN Card:</b> New PAN / Correction / PVC Card</li>
-            <li>✅ <b>Ration Card:</b> Nua Ration Card / Member Add & Delete</li>
-            <li>✅ <b>Certificate:</b> Income / Caste / Residence / EWS</li>
-            <li>✅ <b>Voter ID:</b> New Voter ID / Correction / Link Aadhaar</li>
-            <li>✅ <b>Banking:</b> Money Transfer / Withdrawal / Account Open</li>
-            <li>✅ <b>Farmer:</b> PM Kisan / Krushak Odisha Registration</li>
-            <li>✅ <b>Tickets:</b> Train / Flight / Bus Ticket Booking</li>
-            <li>✅ <b>Others:</b> Passport / DL / Electric Bill / Xerox & Photo</li>
+            <li>✅ Admission (School / College / University)</li>
+            <li>✅ IGNOU / OSOU / NIOS Admission & Form Fillup</li>
+            <li>✅ All Types of Scholarship (Prerana, NRTS, Pathani Samanta)</li>
+            <li>✅ Entrance Exam Forms (OAVS, Navodaya, CT/B.Ed)</li>
+            <li>✅ Online Certificate Download (10th, +2, +3)</li>
+            <li>✅ Job Application Forms (SSC, Railway, OSSC, OSSSC)</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <span class="section-title">📄 Digital & Janaseva Services</span>
+        <ul class="service-list">
+            <li>✅ Aadhaar Card (New/Update/Link)</li>
+            <li>✅ PAN Card (New/Correction/PVC)</li>
+            <li>✅ Ration Card / Voter ID / Labour Card</li>
+            <li>✅ Caste, Income & Residence Certificate</li>
+            <li>✅ Banking & Money Transfer (Micro ATM)</li>
         </ul>
     </div>
 
     <div class="form-area">
-        <span class="section-title">📅 Online Booking Form</span>
+        <span class="section-title" style="border-left-color: #2e7d32;">📅 Book Your Service</span>
         <form id="bookingForm">
-            <label>Customer Name (ପୁରା ନାମ):</label>
-            <input type="text" id="name" placeholder="Enter Full Name" required>
-
-            <label>WhatsApp Number (ମୋବାଇଲ୍):</label>
-            <input type="tel" id="phone" placeholder="91XXXXXXXX" required>
-
-            <label>Select Service (ସେବା ବାଛନ୍ତୁ):</label>
+            <input type="text" id="name" placeholder="Full Name (ପୁରା ନାମ)" required>
+            <input type="tel" id="phone" placeholder="WhatsApp Number" required>
             <select id="service">
-                <option value="Aadhaar">Aadhaar Card</option>
-                <option value="PAN Card">PAN Card</option>
-                <option value="Ration Card">Ration Card</option>
-                <option value="Certificate">Certificate (Caste/Income)</option>
-                <option value="Voter ID">Voter ID Card</option>
+                <option value="Education/Scholarship">Education/Scholarship Service</option>
+                <option value="Aadhaar/PAN">Aadhaar / PAN Card</option>
+                <option value="Certificate">Caste/Income/Residence</option>
                 <option value="Banking/Money">Money Transfer/Banking</option>
-                <option value="Ticket Booking">Ticket Booking</option>
-                <option value="Other">Other Services</option>
+                <option value="Other">Other Digital Service</option>
             </select>
-
             <button type="submit" class="btn">SUBMIT REQUEST ✅</button>
         </form>
-        <div id="success">✅ Dhanyawad! Booking Successful. Hum aapse sampark karenge.</div>
+        <div id="success">✅ Dhanyawad! Form submit ho gaya hai. Hum aapse sampark karenge.</div>
     </div>
 </div>
 
